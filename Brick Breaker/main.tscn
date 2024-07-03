@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv6phqgt62xre"]
+
+[ext_resource type="PackedScene" uid="uid://bj6y4yispatmp" path="res://Items/paddle.tscn" id="1_jm5tb"]
+[ext_resource type="PackedScene" uid="uid://os2k2en7llth" path="res://Items/Wall.tscn" id="2_4shjy"]
+[ext_resource type="PackedScene" uid="uid://gk774jpv7y16" path="res://Items/Brick group.tscn" id="4_mn47k"]
+[ext_resource type="PackedScene" uid="uid://d2vkdfmf6qq67" path="res://Items/Ball.tscn" id="4_no08y"]
+[ext_resource type="Script" path="res://Scripts/Brick_Spawner.gd" id="5_jmq2q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krd2d"]
+size = Vector2(1309.77, 51.409)
+
+[node name="Main" type="Node2D"]
+scale = Vector2(1.2433, 1.6663)
+
+[node name="Paddle" parent="." instance=ExtResource("1_jm5tb")]
+position = Vector2(443.979, 363.079)
+motion_mode = 1
+
+[node name="Wall" parent="." instance=ExtResource("2_4shjy")]
+position = Vector2(-3.21724, 307.267)
+scale = Vector2(1, 9.90575)
+
+[node name="Wall2" parent="." instance=ExtResource("2_4shjy")]
+position = Vector2(565.43, -9.00196)
+rotation = 4.71239
+scale = Vector2(-0.662791, 22.1687)
+
+[node name="Wall3" parent="." instance=ExtResource("2_4shjy")]
+position = Vector2(942.652, 261.657)
+
+[node name="Ball" parent="." instance=ExtResource("4_no08y")]
+position = Vector2(478.565, 277.261)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(480.173, 412.89)
+shape = SubResource("RectangleShape2D_krd2d")
+
+[node name="BrickGroup" parent="." instance=ExtResource("4_mn47k")]
+position = Vector2(30.5638, -18.0039)
+scale = Vector2(0.752747, 0.769866)
+script = ExtResource("5_jmq2q")
+
+[connection signal="body_shape_entered" from="Area2D" to="Ball" method="_on_area_2d_body_shape_entered"]
